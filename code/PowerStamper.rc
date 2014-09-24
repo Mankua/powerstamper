@@ -1,0 +1,432 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_NEBBIUTIL DIALOGEX 0, 0, 108, 278
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    PUSHBUTTON      "Stamp",IDC_PAINT_OUT,8,242,25,12
+    PUSHBUTTON      "Close",IDC_CLOSE,55,261,47,13
+    GROUPBOX        "Selection",IDC_STATIC,4,63,100,22
+    CTEXT           "None Selected",IDC_SEL_NAME,13,73,81,8
+    GROUPBOX        "Stamping image",IDC_STATIC,4,87,100,46
+    PUSHBUTTON      "Render",IDC_RENDER_IN,64,115,34,14
+    CONTROL         "Progress1",IDC_PERCENT,"msctls_progress32",WS_BORDER | 
+                    0x1,35,244,63,8
+    PUSHBUTTON      "Set size",IDC_SIZE_IN,28,115,34,14
+    CONTROL         "Stamping Image",IDC_SET_INBMP,"CustButton",WS_TABSTOP,8,
+                    98,90,14
+    CONTROL         "Output Bitmaps",IDC_SET_OUTBMP,"CustButton",WS_TABSTOP,
+                    8,226,90,14
+    LTEXT           "samples :",IDC_STATIC,16,145,30,8
+    LTEXT           "prefiltering : ",IDC_STATIC,16,156,39,8
+    CONTROL         "",IDC_NEB_SAMP_EDIT,"CustEdit",WS_TABSTOP,60,145,30,10
+    CONTROL         "",IDC_NEB_SAMP_SPIN,"SpinnerControl",0x0,91,145,7,10
+    CONTROL         "",IDC_NEB_PREF_EDIT,"CustEdit",WS_TABSTOP,60,156,30,10
+    CONTROL         "",IDC_NEB_PREF_SPIN,"SpinnerControl",0x0,91,156,7,10
+    GROUPBOX        "",IDC_STATIC,4,128,100,85
+    LTEXT           "Stamping options",IDC_STATIC,8,135,58,8
+    LTEXT           "angle start :",IDC_STATIC,16,178,38,8
+    LTEXT           "angle end :",IDC_STATIC,16,189,36,8
+    CONTROL         "",IDC_NEB_ANGS_EDIT,"CustEdit",WS_TABSTOP,60,178,30,10
+    CONTROL         "",IDC_NEB_ANGS_SPIN,"SpinnerControl",0x0,91,178,7,10
+    CONTROL         "",IDC_NEB_ANGE_EDIT,"CustEdit",WS_TABSTOP,60,189,30,10
+    CONTROL         "",IDC_NEB_ANGE_SPIN,"SpinnerControl",0x0,91,189,7,10
+    LTEXT           "Stamping attenuation",IDC_STATIC,8,168,68,8
+    GROUPBOX        "Images to Stamp",IDC_STATIC,4,215,100,42
+    CONTROL         "A",IDC_NEBBI_ABOUT,"CustButton",WS_TABSTOP,86,46,15,14
+    LTEXT           "Power Stamper",IDC_STATIC,13,49,49,8
+    GROUPBOX        "",IDC_STATIC,4,40,100,22
+    CONTROL         "Premultiplied Alpha                       ",
+                    IDC_PRE_ALPHA,"Button",BS_AUTOCHECKBOX | BS_LEFTTEXT | 
+                    WS_TABSTOP,6,201,93,10
+    PUSHBUTTON      "log",IDC_LOG,5,261,47,13
+    CONTROL         "A",IDC_NEBBI_HELP,"CustButton",WS_TABSTOP,70,46,15,14
+    CONTROL         125,IDC_BANNER,"Static",SS_BITMAP | SS_NOTIFY,4,3,100,38,
+                    WS_EX_CLIENTEDGE
+END
+
+IDD_OUTSIZE DIALOG  0, 0, 149, 42
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Output Bitmap Size"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,95,6,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,95,24,50,14
+    CONTROL         "",IDC_OBS_WIDTH_SPIN,"SpinnerControl",0x0,72,12,7,10
+    CONTROL         "",IDC_OBS_WIDTH,"CustEdit",WS_TABSTOP,41,12,30,10
+    LTEXT           "Width",IDC_STATIC,15,13,20,8
+    GROUPBOX        "",IDC_STATIC,4,0,85,39
+    CONTROL         "",IDC_OBS_HEIGHT_SPIN,"SpinnerControl",0x0,72,24,7,10
+    CONTROL         "",IDC_OBS_HEIGHT,"CustEdit",WS_TABSTOP,41,24,30,10
+    LTEXT           "Height",IDC_STATIC,15,25,22,8
+END
+
+IDD_INSIZE DIALOG  0, 0, 151, 74
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Stamping Image Size"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,97,35,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,97,54,50,14
+    CONTROL         "Viewport size",IDC_SIZE_VIEWPORT,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,7,7,57,10
+    CONTROL         "Custom size",IDC_SIZE_CUSTOM,"Button",
+                    BS_AUTORADIOBUTTON,7,19,53,10
+    GROUPBOX        "",IDC_STATIC,4,1,90,67
+    CONTROL         "",IDC_IBS_WIDTH_SPIN,"SpinnerControl",0x0,81,30,7,10
+    CONTROL         "",IDC_IBS_WIDTH,"CustEdit",WS_TABSTOP,50,30,30,10
+    RTEXT           "Width",IDC_STATIC,26,31,20,8
+    CONTROL         "",IDC_IBS_HEIGHT_SPIN,"SpinnerControl",0x0,81,42,7,10
+    CONTROL         "",IDC_IBS_HEIGHT,"CustEdit",WS_TABSTOP,50,42,30,10
+    RTEXT           "Height",IDC_STATIC,24,43,22,8
+    CONTROL         "",IDC_IBS_ASPECT_SPIN,"SpinnerControl",0x0,82,54,7,10
+    CONTROL         "",IDC_IBS_ASPECT,"CustEdit",WS_TABSTOP,50,54,30,10
+    RTEXT           "Pixel Aspect",IDC_STATIC,6,56,40,8
+END
+
+IDD_OUTBMP_BYMATID DIALOGEX 0, 0, 277, 146
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Output Bitmaps by Material ID"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,86,125,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,141,125,50,14
+    CONTROL         "Set Output Bitmap",IDC_SET_OUTBMP_0,"CustButton",
+                    WS_TABSTOP,107,39,75,14
+    CONTROL         "Set Output Bitmap",IDC_SET_OUTBMP_1,"CustButton",
+                    WS_TABSTOP,107,55,75,14
+    CONTROL         "Set Output Bitmap",IDC_SET_OUTBMP_2,"CustButton",
+                    WS_TABSTOP,107,71,75,14
+    CONTROL         "Set Output Bitmap",IDC_SET_OUTBMP_3,"CustButton",
+                    WS_TABSTOP,107,87,75,14
+    CONTROL         "Set Output Bitmap",IDC_SET_OUTBMP_4,"CustButton",
+                    WS_TABSTOP,107,103,75,14
+    LTEXT           "Mat ID",IDC_STATIC,36,28,22,8
+    LTEXT           "Bitmap",IDC_STATIC,134,28,22,8
+    GROUPBOX        "",IDC_STATIC,4,20,269,101
+    SCROLLBAR       IDC_OUTDLG_SCROLL,261,24,12,96,SBS_VERT
+    CONTROL         "",IDC_MATID_EDIT_0,"CustEdit",WS_TABSTOP,27,41,30,10
+    CONTROL         "",IDC_MATID_EDIT_1,"CustEdit",WS_TABSTOP,27,57,30,10
+    CONTROL         "",IDC_MATID_EDIT_2,"CustEdit",WS_TABSTOP,27,73,30,10
+    CONTROL         "",IDC_MATID_EDIT_3,"CustEdit",WS_TABSTOP,27,89,30,10
+    CONTROL         "",IDC_MATID_EDIT_4,"CustEdit",WS_TABSTOP,27,105,30,10
+    CONTROL         "",IDC_MATID_SPIN_0,"SpinnerControl",0x0,57,41,7,10
+    CONTROL         "",IDC_MATID_SPIN_1,"SpinnerControl",0x0,57,57,7,10
+    CONTROL         "",IDC_MATID_SPIN_2,"SpinnerControl",0x0,57,73,7,10
+    CONTROL         "",IDC_MATID_SPIN_3,"SpinnerControl",0x0,56,89,8,10
+    CONTROL         "",IDC_MATID_SPIN_4,"SpinnerControl",0x0,57,105,7,10
+    LTEXT           "Number of Groups: ",IDC_STATIC,124,9,61,8
+    PUSHBUTTON      "Set Number",IDC_SET_NUMGROUPS,69,7,50,14
+    CTEXT           "2",IDC_TXT_NUMGROUPS,187,8,21,11,SS_CENTERIMAGE,
+                    WS_EX_STATICEDGE
+    CONTROL         "Set",IDC_SET_SIZE_0,"CustButton",WS_TABSTOP,185,39,36,
+                    14
+    CONTROL         "Set",IDC_SET_SIZE_1,"CustButton",WS_TABSTOP,185,55,36,
+                    14
+    CONTROL         "Set",IDC_SET_SIZE_2,"CustButton",WS_TABSTOP,185,71,36,
+                    14
+    CONTROL         "Set",IDC_SET_SIZE_3,"CustButton",WS_TABSTOP,185,87,36,
+                    14
+    CONTROL         "Set",IDC_SET_SIZE_4,"CustButton",WS_TABSTOP,185,103,36,
+                    14
+    LTEXT           "Bitmap Size",IDC_STATIC,185,28,38,8
+    CONTROL         "Delete",IDC_GROUP_DELETE_0,"CustButton",WS_TABSTOP,223,
+                    39,36,14
+    CONTROL         "Delete",IDC_GROUP_DELETE_1,"CustButton",WS_TABSTOP,223,
+                    55,36,14
+    CONTROL         "Delete",IDC_GROUP_DELETE_2,"CustButton",WS_TABSTOP,223,
+                    71,36,14
+    CONTROL         "Delete",IDC_GROUP_DELETE_3,"CustButton",WS_TABSTOP,223,
+                    87,36,14
+    CONTROL         "Delete",IDC_GROUP_DELETE_4,"CustButton",WS_TABSTOP,223,
+                    103,36,14
+    LTEXT           "Use",IDC_STATIC,10,28,14,8
+    CONTROL         "",IDC_GROUP_USE_0,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    12,42,8,8
+    CONTROL         "",IDC_GROUP_USE_1,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    12,58,8,8
+    CONTROL         "",IDC_GROUP_USE_2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    12,74,8,8
+    CONTROL         "",IDC_GROUP_USE_3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    12,90,8,8
+    CONTROL         "",IDC_GROUP_USE_4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    12,106,8,8
+    CONTROL         "",IDC_UVW_SPIN_0,"SpinnerControl",0x0,97,41,7,10
+    CONTROL         "",IDC_UVW_SPIN_1,"SpinnerControl",0x0,97,57,7,10
+    CONTROL         "",IDC_UVW_SPIN_2,"SpinnerControl",0x0,97,73,7,10
+    CONTROL         "",IDC_UVW_SPIN_3,"SpinnerControl",0x0,97,89,7,10
+    CONTROL         "",IDC_UVW_SPIN_4,"SpinnerControl",0x0,97,105,7,10
+    LTEXT           "UVW",IDC_STATIC,77,28,18,8
+    CONTROL         "",IDC_UVW_EDIT_0,"CustEdit",WS_TABSTOP,67,41,30,10
+    CONTROL         "",IDC_UVW_EDIT_1,"CustEdit",WS_TABSTOP,67,57,30,10
+    CONTROL         "",IDC_UVW_EDIT_2,"CustEdit",WS_TABSTOP,67,73,30,10
+    CONTROL         "",IDC_UVW_EDIT_3,"CustEdit",WS_TABSTOP,67,89,30,10
+    CONTROL         "",IDC_UVW_EDIT_4,"CustEdit",WS_TABSTOP,67,105,30,10
+END
+
+IDD_NUM_GROUPS DIALOG  0, 0, 180, 46
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Set Number of Groups"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,123,7,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,123,24,50,14
+    CONTROL         "",IDC_NUMGROUPS_EDIT,"CustEdit",WS_TABSTOP,76,18,30,10
+    CONTROL         "",IDC_NUMGROUPS_SPIN,"SpinnerControl",0x0,107,18,7,10
+    LTEXT           "Number of Groups:",IDC_STATIC,13,19,60,8
+    GROUPBOX        "",IDC_STATIC,7,3,113,36
+END
+
+IDD_LOG_DLG DIALOG  0, 0, 233, 173
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "PowerStamper Log Info"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL         "",IDC_LOG_TEXT,"RICHEDIT",TCS_FOCUSONBUTTONDOWN | 
+                    TCS_MULTISELECT | WS_BORDER | WS_VSCROLL | WS_TABSTOP | 
+                    0xc00,7,7,219,159
+END
+
+IDD_ABOUT DIALOGEX 0, 0, 225, 63
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About PowerStamper"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    GROUPBOX        "",IDC_STATIC,4,0,217,59
+    LTEXT           "Power Stamper 1.0\nMarch 10, 2009\n\nDeveloped by Diego A. Castaño\nAll Rights Reserved © 2001-2009\nMankua Software Inc.",
+                    IDC_STATIC,110,7,109,49
+    CONTROL         121,IDC_MANKUA,"Static",SS_BITMAP,7,7,97,49,
+                    WS_EX_CLIENTEDGE
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_OUTSIZE, DIALOG
+    BEGIN
+        LEFTMARGIN, 4
+        RIGHTMARGIN, 145
+        TOPMARGIN, 4
+        BOTTOMMARGIN, 38
+    END
+
+    IDD_OUTBMP_BYMATID, DIALOG
+    BEGIN
+        LEFTMARGIN, 4
+        RIGHTMARGIN, 273
+        TOPMARGIN, 4
+        BOTTOMMARGIN, 139
+    END
+
+    IDD_NUM_GROUPS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 173
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 39
+    END
+
+    IDD_LOG_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 226
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 166
+    END
+
+    IDD_ABOUT, DIALOG
+    BEGIN
+        LEFTMARGIN, 4
+        RIGHTMARGIN, 221
+        TOPMARGIN, 4
+        BOTTOMMARGIN, 59
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,0
+ PRODUCTVERSION 1,0,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", "DEVELOPED by Diego A. Castaño"
+            VALUE "CompanyName", "Mankua"
+            VALUE "FileDescription", "PowerStamper"
+            VALUE "FileVersion", "1.0"
+            VALUE "InternalName", "Nebbi"
+            VALUE "LegalCopyright", "Copyright © 2001 Diego A. Castaño"
+            VALUE "OriginalFilename", "PowStamp.dlu"
+            VALUE "ProductName", "3D Studio MAX"
+            VALUE "ProductVersion", "1.0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_OUTBMPS_MENU MENU 
+BEGIN
+    POPUP "Options"
+    BEGIN
+        MENUITEM "Delete Bitmap",               IDM_DEL_OUTFILE
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_ABOUT               BITMAP                  "About.bmp"
+IDB_ABOUT_MASK          BITMAP                  "About_Mask.bmp"
+IDB_PS_LOGO             BITMAP                  "ps_logo.bmp"
+IDB_MANKUA_WHITE        BITMAP                  "C:\\WorkspaceSVN\\Mankua\\Logos\\logo_mankua_white_h76.bmp"
+IDB_MANKUA_BLACK        BITMAP                  "C:\\WorkspaceSVN\\Mankua\\Logos\\logo_mankua_black_h76.bmp"
+IDB_HELP_MASK           BITMAP                  "Help_Mask.bmp"
+IDB_HELP                BITMAP                  "Help.bmp"
+IDB_BANNER_CRACKART     BITMAP                  "C:\\WorkspaceSVN\\Mankua\\Logos\\banner_crackart_150.bmp"
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.K.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENG)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_UK
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_CLASSNAME           "PowerStamper"
+    IDS_PARAMETERS          "Parameters"
+    IDS_LIBDESC             "PowerStamper 1.0 ( DEMO ) Mankua ( www.mankua.com )"
+    IDS_CATEGORY            "PowerStamper"
+    IDS_MULTISEL            "Multiple Selected"
+    IDS_NONESEL             "None Selected"
+    IDS_SET_INPUT_BMP       "Set/Save Stamping Image "
+    IDS_OUT_MULTIPLE_BMPS   "Multiple Bitmaps"
+    IDS_OUT_NONE_BMP        "Output Bitmap"
+    IDS_SET_OUTPUT_BMP      "Set Output Bitmap"
+    IDS_ASK_DELETEFILE      "Are you sure you want to DELETE\n%s\nfrom the Hard Disk Drive?"
+    IDS_ASK_DELETEGROUP     "Are you sure you want to DELETE this group?\n - %s\n - mat ID : %d\n - uvw : %d"
+    IDS_USER_NAME           "u0u1u2u3u4u5u6u7u8u9u0u1u2u3u4u5u6u7u8u9"
+    IDS_COMPANY             "c0c1c2c3c4c5c6c7c8c9c0c1c2c3c4c5c6c7c8c9"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_CANCEL_PAINT        "Are you sure you want to cancel the current stamping process?"
+    IDS_SERIAL_NUMBER       "s0s1s2s3s4s5s6s7s8s9s0s1s2s3s4s5s6s7s8s9"
+    IDS_SIMPLE              "UVW Channel"
+    IDS_FRAMEMOD_CLASSNAME  "UVW Frame"
+    IDS_REQ_AUTH            "Request Authorization...!"
+END
+
+#endif    // English (U.K.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
