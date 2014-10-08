@@ -5,7 +5,7 @@
  |			Texture Builder by Bitmap Projection for 3d studio max
  |			3D Studio MAX R3.0
  | 
- |  AUTH:   Diego A. Castaño
+ |  AUTH:   Diego A. CastaÃ±o
  |			Mankua
  |			Copyright(c) Mankua 2001
  |
@@ -25,12 +25,6 @@ Slot 6 :	Output Group 1 Data
 Slot 7 :	Output Group 1 BMP Name
 */
 
-#if ( MAX_RELEASE >= 9000 )
-	#define MAX_MALLOC MAX_malloc
-#else
-	#define MAX_MALLOC malloc
-#endif
-
 #define APP_DATA_NEBBI_VERSION		0
 #define APP_DATA_INPUT_DATA			1
 #define APP_DATA_INPUT_NAME			2
@@ -49,6 +43,16 @@ Slot 7 :	Output Group 1 BMP Name
 #define WARN_NO_INIMAGE		5
 #define WARN_INVALID_OBJ	6
 #define WARN_NOTHING_REND	7
+
+#if MAX_VERSION_MAJOR < 15 // Max2013
+ #define wstring string
+#endif
+
+#if MAX_VERSION_MAJOR < 9
+	#define MAX_MALLOC malloc
+#else
+	#define MAX_MALLOC MAX_malloc
+#endif
 
 Bitmap *	NebbiUtility::inBM = NULL;
 
@@ -102,10 +106,10 @@ static void LoadImages()
 	}
 }	
 
-#if ( MAX_RELEASE >= 9000 )
-static INT_PTR CALLBACK AboutDlgProc(HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam)
-#else
+#if MAX_VERSION_MAJOR < 9
 static BOOL CALLBACK AboutDlgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) 
+#else
+static INT_PTR CALLBACK AboutDlgProc(HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam)
 #endif
 {
 	switch (msg) {
@@ -126,10 +130,10 @@ static BOOL CALLBACK AboutDlgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lPa
 	return TRUE;
 	}
 
-#if ( MAX_RELEASE >= 9000 )
-static INT_PTR CALLBACK LogDlgProc(HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam)
-#else
+#if MAX_VERSION_MAJOR < 9
 static BOOL CALLBACK LogDlgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) 
+#else
+static INT_PTR CALLBACK LogDlgProc(HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam)
 #endif
 {
 	TCHAR * info;
@@ -158,10 +162,10 @@ static BOOL CALLBACK LogDlgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lPara
  |	Dialog Handler for Utility
 \*===========================================================================*/
 
-#if ( MAX_RELEASE >= 9000 )
-static INT_PTR CALLBACK InSizeDlgProc(HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam)
-#else
+#if MAX_VERSION_MAJOR < 9
 static BOOL CALLBACK InSizeDlgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) 
+#else
+static INT_PTR CALLBACK InSizeDlgProc(HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam)
 #endif
 {
 	static float *os;
@@ -249,10 +253,10 @@ static BOOL CALLBACK InSizeDlgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lP
 	return TRUE;
 	}
 
-#if ( MAX_RELEASE >= 9000 )
-static INT_PTR CALLBACK OutSizeDlgProc(HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam)
-#else
+#if MAX_VERSION_MAJOR < 9
 static BOOL CALLBACK OutSizeDlgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) 
+#else
+static INT_PTR CALLBACK OutSizeDlgProc(HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam)
 #endif
 {
 	static int *os;
@@ -295,10 +299,10 @@ static BOOL CALLBACK OutSizeDlgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM l
 
 #define ITEMS_IN_LIST 5
 
-#if ( MAX_RELEASE >= 9000 )
-static INT_PTR CALLBACK NumGroupsDlgProc(HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam)
-#else
+#if MAX_VERSION_MAJOR < 9
 static BOOL CALLBACK NumGroupsDlgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) 
+#else
+static INT_PTR CALLBACK NumGroupsDlgProc(HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam)
 #endif
 {
 	switch (msg) {
@@ -332,10 +336,10 @@ static BOOL CALLBACK NumGroupsDlgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM
 	return TRUE;
 	}
 
-#if ( MAX_RELEASE >= 9000 )
-static INT_PTR CALLBACK OutputsDlgProc(HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam)
-#else
+#if MAX_VERSION_MAJOR < 9
 static BOOL CALLBACK OutputsDlgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) 
+#else
+static INT_PTR CALLBACK OutputsDlgProc(HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam)
 #endif
 {
 	static OutputGroupsInfo *ogi;
@@ -424,7 +428,7 @@ static BOOL CALLBACK OutputsDlgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM l
 							TSTR question;
 							question.printf( GetString(IDS_ASK_DELETEFILE) , ogi->bmp_names[ menuGroup ].c_str() );
 
-							if ( MessageBox( hWnd , question , "Are you sure?", MB_YESNO) == IDYES ) 
+							if ( MessageBox( hWnd , question , _T("Are you sure?"), MB_YESNO) == IDYES ) 
 							{
 								DeleteFile( ogi->bmp_names[ menuGroup ].c_str() );
 								display_buttons = TRUE;
@@ -441,7 +445,7 @@ static BOOL CALLBACK OutputsDlgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM l
 					int group = firstInList + (LOWORD(wParam) - IDC_GROUP_DELETE_0);
 					TSTR question;
 					question.printf( GetString(IDS_ASK_DELETEGROUP) , ogi->bmp_names[ group ] , ogi->mat_ids[ group ]+1 , ogi->uvw[ group ] );
-					if ( MessageBox( hWnd , question , "Are you sure?", MB_YESNO) == IDYES ) {
+					if ( MessageBox( hWnd , question , _T("Are you sure?"), MB_YESNO) == IDYES ) {
 						ogi->DeleteGroup( group );
 
 						if ( firstInList == group )	firstInList--;
@@ -616,7 +620,7 @@ static BOOL CALLBACK OutputsDlgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM l
 						iSizeBut->Enable(TRUE);
 						iBmpBut->SetRightClickNotify(FALSE);
 						TSTR sizeBuf;
-						sizeBuf.printf(_T("%d × %d") , ogi->out_widths[group] , ogi->out_heights[group] );
+						sizeBuf.printf(_T("%d Ã— %d") , ogi->out_widths[group] , ogi->out_heights[group] );
 						iSizeBut->SetTooltip( TRUE , sizeBuf );
 						}
 					}
@@ -650,10 +654,10 @@ static BOOL CALLBACK OutputsDlgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM l
 	}
 
 
-#if ( MAX_RELEASE >= 9000 )
-static INT_PTR CALLBACK DefaultDlgProc(HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam)
-#else
+#if MAX_VERSION_MAJOR < 9
 static BOOL CALLBACK DefaultDlgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) 
+#else
+static INT_PTR CALLBACK DefaultDlgProc(HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam)
 #endif
 {
 	switch (msg) {
@@ -718,7 +722,7 @@ static BOOL CALLBACK DefaultDlgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM l
 				break;
 
 				case IDC_NEBBI_HELP: 
-					ShellExecute(NULL, "open", "http://www.mankua.com/powerstamper.php", NULL, NULL, SW_SHOWNORMAL);
+					ShellExecute(NULL, _T("open"), _T("http://www.mankua.com/powerstamper.php"), NULL, NULL, SW_SHOWNORMAL);
 				break;
 
 				case IDC_LOG:
@@ -755,7 +759,7 @@ static BOOL CALLBACK DefaultDlgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM l
 					break;
 
 				case IDC_BANNER:
-					ShellExecute(NULL, "open", "http://www.crackart.org", NULL, NULL, SW_SHOWNORMAL);
+					ShellExecute(NULL, _T("open"), _T("http://www.crackart.org"), NULL, NULL, SW_SHOWNORMAL);
 					break;
 			}
 			break;
@@ -856,7 +860,7 @@ BOOL NebbiUtility::IsGoodObjectToStamp( ObjectState &os )
 	return os.obj->SuperClassID()==GEOMOBJECT_CLASS_ID && os.obj->IsRenderable();
 }
 
-void NebbiUtility::PutInputData( InputData &in_data, std::string &in_name )
+void NebbiUtility::PutInputData( InputData &in_data, std::wstring &in_name )
 {
 	int size = sizeof( InputData );
 
@@ -896,7 +900,11 @@ void NebbiUtility::PutInputData( InputData &in_data, std::string &in_name )
 			if ( in_name.length() ) 
 			{
 				int len = in_name.length() + 1;
+#if MAX_VERSION_MAJOR < 15 // Max2013
 				TCHAR * app_name = (TCHAR*)MAX_MALLOC(len);
+#else
+				TCHAR * app_name = (TCHAR*)MAX_MALLOC(len * sizeof(TCHAR));
+#endif
 				_tcscpy( app_name, in_name.c_str() );
 
 				node->RemoveAppDataChunk(	NEBBI_CLASSID, UTILITY_CLASS_ID, APP_DATA_INPUT_NAME);
@@ -944,7 +952,7 @@ void NebbiUtility::GetInputData( InputData &in_data )
 	}
 }
 
-void NebbiUtility::GetInputName( std::string &in_name ) 
+void NebbiUtility::GetInputName( std::wstring &in_name ) 
 {
 	int numnodes = ip->GetSelNodeCount();
 
@@ -1020,7 +1028,7 @@ void NebbiUtility::PutNumOutGroups( int n_g )
 	}
 }
 
-void NebbiUtility::PutOutputData( int group_id, OutputData &out_data, std::string &out_name ) 
+void NebbiUtility::PutOutputData( int group_id, OutputData &out_data, std::wstring &out_name ) 
 {
 	int size = sizeof( OutputData );
 	int data_slot = APP_DATA_OUTGROUP_DATA + group_id*2;
@@ -1045,7 +1053,11 @@ void NebbiUtility::PutOutputData( int group_id, OutputData &out_data, std::strin
 		if ( out_name.length() )
 		{
 			int len = out_name.length() + 1;
+#if MAX_VERSION_MAJOR < 15 // Max2013
 			TCHAR * app_name = (TCHAR*)MAX_MALLOC(len);
+#else
+			TCHAR * app_name = (TCHAR*)MAX_MALLOC(len * sizeof(TCHAR));
+#endif
 			_tcscpy( app_name, out_name.c_str() );
 
 			node->RemoveAppDataChunk( NEBBI_CLASSID, UTILITY_CLASS_ID, name_slot );
@@ -1054,7 +1066,7 @@ void NebbiUtility::PutOutputData( int group_id, OutputData &out_data, std::strin
 	}
 }
 
-void NebbiUtility::GetOutputName( int group_id, std::string &out_name )
+void NebbiUtility::GetOutputName( int group_id, std::wstring &out_name )
 {
 	int name_slot = APP_DATA_OUTGROUP_NAME + group_id*2;
 
@@ -1118,7 +1130,7 @@ int NebbiUtility::GetNumOutGroups( INode * node )
 	else				return 0;
 	}
 
-void NebbiUtility::GetOutputName( INode * node, int group_id, std::string &out_name ) 
+void NebbiUtility::GetOutputName( INode * node, int group_id, std::wstring &out_name ) 
 {
 	int name_slot = APP_DATA_OUTGROUP_NAME + group_id*2;
 
@@ -1185,7 +1197,7 @@ void NebbiUtility::ShowInputData()
 
 void NebbiUtility::ShowInputBMPName()
 {
-	std::string in_name;
+	std::wstring in_name;
 	InputData   in_data;
 
 	GetInputName( in_name );
@@ -1268,7 +1280,7 @@ void NebbiUtility::SetInputBMP()
 
 	GetUIData( in_data );
 
-	std::string in_name = inBI.Name();
+	std::wstring in_name = inBI.Name();
 
 	PutInputData( in_data, in_name );
 	
@@ -1299,7 +1311,7 @@ void NebbiUtility::GetUIData( InputData &in_data )
 
 void NebbiUtility::SetInputData()
 {
-	std::string in_name;
+	std::wstring in_name;
 	InputData   in_data;
 
 	GetInputName( in_name );
@@ -1330,7 +1342,7 @@ void NebbiUtility::SetInputData()
 void NebbiUtility::SetSizeIn() 
 {
 	InputData   in_data;
-	std::string in_name;
+	std::wstring in_name;
 
 	GetInputData( in_data );
 	GetInputName( in_name );
@@ -1356,7 +1368,7 @@ void NebbiUtility::SetSizeIn()
 
 void NebbiUtility::RenderInputBMP()
 {
-	std::string in_name;
+	std::wstring in_name;
 	InputData   in_data;
 
 	GetInputName( in_name );
@@ -1373,11 +1385,19 @@ void NebbiUtility::RenderInputBMP()
 	int w,h;
 	float aspect;
 
+#if MAX_VERSION_MAJOR < 15
 	ViewExp *view = ip->GetActiveViewport();
-
+#else
+	ViewExp& view = ip->GetActiveViewExp();
+#endif
+	
 	if ( !in_data.custom_size )
 	{
+#if MAX_VERSION_MAJOR < 15
 		GraphicsWindow * gw = view->getGW();
+#else
+		GraphicsWindow * gw = view.getGW();
+#endif
 		w = gw->getWinSizeX();
 		h = gw->getWinSizeY();
 		aspect = 1.0f;
@@ -1411,7 +1431,11 @@ void NebbiUtility::RenderInputBMP()
 	inBM = TheManager->Create(&bi);
 	inBM->Display(_T("Stamping Image Render "));
 
+#if MAX_VERSION_MAJOR < 15
 	ip->OpenCurRenderer(NULL,view);
+#else
+	ip->OpenCurRenderer(NULL,view.ToPointer());
+#endif
 	ip->CurRendererRenderFrame(ip->GetTime(),inBM);
 	ip->CloseCurRenderer();	
 
@@ -1419,7 +1443,9 @@ void NebbiUtility::RenderInputBMP()
 	inBM->Write(&bi);
 	inBM->Close(&bi);
 
+#if MAX_VERSION_MAJOR < 15
 	ip->ReleaseViewport(view);
+#endif
 
 	// Let's put this same info to all our objects!
 
@@ -1492,7 +1518,7 @@ void NebbiUtility::SetOutBmpsByMatID() {
 
 		for ( int n_g=0; n_g<num_groups; n_g++ )
 		{
-			std::string out_name;
+			std::wstring out_name;
 			OutputData out_data;
 
 			GetOutputName( n_g, out_name );
@@ -1522,7 +1548,7 @@ void NebbiUtility::SetOutBmpsByMatID() {
 
 		for ( int n_g=0; n_g<outInfo.num_groups; n_g++ )
 		{
-			std::string out_name = outInfo.bmp_names[n_g];
+			std::wstring out_name = outInfo.bmp_names[n_g];
 
 			OutputData out_data;
 
@@ -1614,7 +1640,7 @@ void NebbiUtility::PaintOutputBMP() {
 
 	TimeValue t = ip->GetTime();
 
-	std::string in_name;
+	std::wstring in_name;
 	InputData   in_data;
 
 	GetInputName( in_name );
@@ -1688,7 +1714,7 @@ void NebbiUtility::PaintOutputBMP() {
 						
 					BitmapInfo outBI;
 
-					std::string out_name;
+					std::wstring out_name;
 					OutputData out_data;
 					
 					GetOutputName( node, i_group, out_name );
@@ -1773,7 +1799,7 @@ void NebbiUtility::PaintOutputBMP() {
 
 												BOOL cancel = GetAsyncKeyState(VK_ESCAPE)<0;
 												if (cancel) {
-													if ( MessageBox(hPanel , GetString(IDS_CANCEL_PAINT), "Cancel Painting", MB_YESNO) == IDYES ) {
+													if ( MessageBox(hPanel , GetString(IDS_CANCEL_PAINT), _T("Cancel Painting"), MB_YESNO) == IDYES ) {
 														nS = numScans + 1;
 														nTh = numProcessors + 1;
 														canceled = TRUE;
@@ -1887,7 +1913,7 @@ int NebbiUtility::BuildZones(NebbiRendContext *rgc, Mesh *theMesh) {
 				{
 					rn = rv->rn.getNormal();
 				}
-				else if (( num_normals = rv->rFlags & NORCT_MASK) && smGroup)
+				else if ((( num_normals = rv->rFlags & NORCT_MASK) != 0) && smGroup)
 				{
 					if (num_normals == 1)
 					{
@@ -2268,7 +2294,7 @@ float NebbiUtility::GetAttenuation(NebbiShadeContext &sc) {
 		if (rv->rFlags & SPECIFIED_NORMAL)
 			rvn[i] = rv->rn.getNormal();
 
-		else if (( num_normals = rv->rFlags & NORCT_MASK) && smGroup)
+		else if ((( num_normals = rv->rFlags & NORCT_MASK) != 0) && smGroup)
 
 			if (num_normals == 1)
 				rvn[i] = rv->rn.getNormal();
@@ -2317,7 +2343,7 @@ void NebbiUtility::ApplyCamMap(NebbiRendContext *rgc, INode * object)
 	TimeValue t = ip->GetTime();
 
 	InputData in_data;
-	std::string name;
+	std::wstring name;
 
 	GetInputData( in_data );
 	GetInputName( name );
@@ -2333,6 +2359,7 @@ void NebbiUtility::ApplyCamMap(NebbiRendContext *rgc, INode * object)
 	int in_height      = in_data.input_height;
 	float in_aspect    = in_data.input_aspect;
 
+#if MAX_VERSION_MAJOR < 15
 	ViewExp *view = ip->GetActiveViewport();
 	GraphicsWindow * gw = view->getGW();
 
@@ -2343,6 +2370,18 @@ void NebbiUtility::ApplyCamMap(NebbiRendContext *rgc, INode * object)
 	if ( view->GetViewCamera() ) 
 	{
 		INode * camera = view->GetViewCamera();
+#else
+	ViewExp& view = ip->GetActiveViewExp();
+	GraphicsWindow * gw = view.getGW();
+	
+	Matrix3 affineTM;
+	view.GetAffineTM(affineTM);
+	rgc->perspective = view.IsPerspView(); 
+
+	if ( view.GetViewCamera() ) 
+	{
+		INode * camera = view.GetViewCamera();
+#endif
 		ObjectState camOState = camera->EvalWorldState(t);
 
 		if ( ((CameraObject *)camOState.obj)->GetEnvDisplay() )
@@ -2389,7 +2428,11 @@ void NebbiUtility::ApplyCamMap(NebbiRendContext *rgc, INode * object)
 
 	if ( rgc->perspective )
 	{
+#if MAX_VERSION_MAJOR < 15
 		float fov = view->GetFOV();
+#else
+		float fov = view.GetFOV();
+#endif
 		float fac =  -(float)(1.0 / tan(0.5*(double)fov));
 		xscale =  fac * dw2;   // dw2 = float(devWidth)/2.0
 		yscale =  xscale * in_aspect;
@@ -2398,11 +2441,17 @@ void NebbiUtility::ApplyCamMap(NebbiRendContext *rgc, INode * object)
 	{
 		int gwI = 0;
 		int gwF = gww;
-
+#if MAX_VERSION_MAJOR < 15
 		if ( view->getSFDisplay() ) 
 		{
 			int vw = view->getGW()->getWinSizeX();
 			int vh = view->getGW()->getWinSizeY();
+#else
+		if ( view.getSFDisplay() ) 
+		{
+			int vw = view.getGW()->getWinSizeX();
+			int vh = view.getGW()->getWinSizeY();
+#endif
 			float va = float(vw)/float(vh);
 
 			int rw = ip->GetRendWidth();
@@ -2413,16 +2462,26 @@ void NebbiUtility::ApplyCamMap(NebbiRendContext *rgc, INode * object)
 			{
 				vw = vh * ra;
 
+#if MAX_VERSION_MAJOR < 15
 				int sfs = ( view->getGW()->getWinSizeX() - vw ) / 2;
-
 				gwI = sfs;
 				gwF = view->getGW()->getWinSizeX() - sfs;
+#else
+				int sfs = ( view.getGW()->getWinSizeX() - vw ) / 2;
+				gwI = sfs;
+				gwF = view.getGW()->getWinSizeX() - sfs;
+#endif
 			}
 		}
 
 		IPoint2 vp1(gwI,0),vp2(gwF,0);
+#if MAX_VERSION_MAJOR < 15
 		Point3 cp1 = view->GetPointOnCP(vp1);	// Proyeccion en el plano de construccion
 		Point3 cp2 = view->GetPointOnCP(vp2);	// de cada uno de los puntos
+#else
+		Point3 cp1 = view.GetPointOnCP(vp1);	// Proyeccion en el plano de construccion
+		Point3 cp2 = view.GetPointOnCP(vp2);	// de cada uno de los puntos
+#endif
 		float vptWid = float(sqrt(pow((cp1.x - cp2.x),2) + pow((cp1.y - cp2.y),2) + pow((cp1.z - cp2.z),2)));
 
 		xscale = (float)w/vptWid;
@@ -2478,7 +2537,9 @@ void NebbiUtility::ApplyCamMap(NebbiRendContext *rgc, INode * object)
 
 	SetPercent(10);
 
+#if MAX_VERSION_MAJOR < 15
 	ip->ReleaseViewport(view);
+#endif
 }
 
 void NebbiUtility::UpdateTMaps(Texmap * map, BitmapInfo * bi, Bitmap * bm)
