@@ -5,7 +5,7 @@
  |			Texture Builder by Bitmap Projection for 3d studio max
  |			3D Studio MAX R3.0
  | 
- |  AUTH:   Diego A. Castaño
+ |  AUTH:   Diego A. CastaÃ±o
  |			Mankua
  |			Copyright(c) Mankua 2001
  |
@@ -25,6 +25,9 @@
 
 #include "resource.h"
 
+#if MAX_VERSION_MAJOR < 15 // Max2013
+ #define wstring string
+#endif
 
 // IMPORTANT:
 // The ClassID must be changed whenever a new project
@@ -336,7 +339,7 @@ public:
 
 	std::vector<int> mat_ids;
 
-	std::vector<std::string> bmp_names;
+	std::vector<std::wstring> bmp_names;
 
 	std::vector<int> out_widths;
 	std::vector<int> out_heights;
@@ -356,7 +359,7 @@ public:
 		{
 			for ( int i=n_g; i<num_groups; i++ ) 
 			{
-				bmp_names[i] = "";
+				bmp_names[i] = _T("");
 			}
 			
 			num_groups = n_g;
@@ -378,7 +381,7 @@ public:
 
 			for ( int i=num_groups; i<n_g; i++ ) 
 			{
-				bmp_names[i] = "";
+				bmp_names[i] = _T("");
 				use[i] = TRUE;
 				mat_ids[i] = i;
 				uvw[i] = 1;
@@ -471,9 +474,9 @@ class NebbiUtility : public UtilityObj {
 
 		void SelectionSetChanged(Interface *ip,IUtil *iu);
 
-		void PutInputData( InputData &in_data, std::string &in_name );
+		void PutInputData( InputData &in_data, std::wstring &in_name );
 		void GetInputData( InputData &in_data );
-		void GetInputName( std::string &in_name );
+		void GetInputName( std::wstring &in_name );
 		void DlgInputSize( float * inputSize );
 
 		void ShowInputData();
@@ -489,13 +492,13 @@ class NebbiUtility : public UtilityObj {
 		int GetNumOutGroups();
 		void PutNumOutGroups( int n_g );
 
-		void PutOutputData( int group_id, OutputData &out_data, std::string &out_name );
+		void PutOutputData( int group_id, OutputData &out_data, std::wstring &out_name );
 		void GetOutputData( int group_id, OutputData &out_data );
-		void GetOutputName( int group_id, std::string &out_name );
+		void GetOutputName( int group_id, std::wstring &out_name );
 
 		int GetNumOutGroups( INode * node );
 		void GetOutputData(  INode * node, int group_id, OutputData &out_data );
-		void GetOutputName(  INode * node, int group_id, std::string &out_name );
+		void GetOutputName(  INode * node, int group_id, std::wstring &out_name );
 
 		void ShowOutputBMPName();
 		void SetOutBmpsByMatID();
