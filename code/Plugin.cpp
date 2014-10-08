@@ -15,7 +15,9 @@
 #include "Nebbi.h"
 
 HINSTANCE hInstance;
-int controlsInit = FALSE;
+#if MAX_VERSION_MAJOR < 10
+	int controlsInit = FALSE;
+#endif
 
 BOOL InDate() {
 	return TRUE;
@@ -35,6 +37,8 @@ BOOL InDate() {
 	}
 
 BOOL WINAPI DllMain(HINSTANCE hinstDLL,ULONG fdwReason,LPVOID lpvReserved) {
+
+#if MAX_VERSION_MAJOR < 10
 	hInstance = hinstDLL;
 
 	if ( !controlsInit ) {
@@ -52,7 +56,15 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL,ULONG fdwReason,LPVOID lpvReserved) {
 			break;
 		case DLL_PROCESS_DETACH:
 			break;
-		}
+	}
+#else
+	if( fdwReason == DLL_PROCESS_ATTACH )
+	{
+		hInstance = hinstDLL;
+		DisableThreadLibraryCalls(hInstance);
+	}
+#endif
+
 	return(TRUE);
 }
 
@@ -78,12 +90,17 @@ __declspec( dllexport ) ClassDesc* LibClassDesc(int i) {
 __declspec( dllexport ) ULONG LibVersion() { return VERSION_3DSMAX; }
 
 
+__declspec( dllexport ) ULONG CanAutoDefer() { return 1; }
+
 
 TCHAR *GetString(int id)
 {
 	static TCHAR buf[256];
 	if(hInstance)
+#if MAX_VERSION_MAJOR < 15
 		return LoadString(hInstance, id, buf, sizeof(buf)) ? buf : NULL;
-
+#else
+		return LoadString(hInstance, id, buf, _countof(buf)) ? buf : NULL;
+#endif	
 	return NULL;
 }
